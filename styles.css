@@ -1,0 +1,43 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+.item {
+    border: 2px solid #e6e6e6;
+    border-radius: 5px;
+    width: 180px;
+    height: 250px;
+}
+
+.item-pic {
+    width: 180px;
+    height: 150px;
+}
+
+.item-pic img {
+    object-fit: contain;
+    height: 100%;
+    width: 100%;
+}
+
+.item-info * {
+    margin: 5px;
+    margin-left: 10px;
+}
+
+.item .quantity {
+    width: 40px;
+    height: 25px;
+    padding-left: 2px;
+    Vertical-align:bottom
+}
+
+.item .add-item {
+    height: 25px;
+    padding-left: 8px;
+    padding-right: 8px;
+    float: right;
+    margin-right: 12px;
+}
