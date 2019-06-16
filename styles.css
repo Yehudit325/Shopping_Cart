@@ -4,15 +4,23 @@
     box-sizing: border-box;
   }
 
+.items-container {
+    display: flex;
+    /* justify-content: flex-start; */
+    flex-wrap: wrap;
+    /* width: 70%; */
+}
+
 .item {
     border: 2px solid #e6e6e6;
     border-radius: 5px;
     width: 180px;
     height: 250px;
+    margin: 5px;
 }
 
 .item-pic {
-    width: 180px;
+    width: 170px;
     height: 150px;
 }
 

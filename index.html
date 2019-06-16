@@ -5,25 +5,23 @@
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
     <title>Shopping Cart</title>
     <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="responsive.css">
+    <!-- <link rel="stylesheet" href="responsive.css"> -->
 </head>
 
 <body>
-    <div class="inventory">
-        <div class="item">
-            <div class="item-pic">
-                <img src=".\images\yogurt.png"/>
-            </div>
-            <div class="item-info">
-                <p class="product-name">name</p>
-                <p class="price">5.90</p>
-                <input class="quantity" type="number" min="0" value="0">
-                <button class="add-item">Add to cart</button>
-            </div>
-        </div>
-    </div>
+    <div class="shopping-app">
+        <div id="inventory" class="items-container"></div>
+        
+        <div class="shopping-cart">
 
-    <script src="app.js"></script>
+        </div>
+
+    </div>
+    
+
+    <script src="model.js"></script>
+    <script src="view.js"></script>
+    <script src="control.js"></script>
 </body>
 
 </html>
