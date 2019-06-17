@@ -10,6 +10,10 @@ class Controller {
     getProducts() {
         return productsData;
     }
+
+    addProductToCart(item) {
+        cart.push(item);
+    }
 }
 
 const shoppingCartApp = new Controller(productsView);

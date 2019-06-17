@@ -1,4 +1,5 @@
 class View {
+
 	init() {
         this.renderProducts();
     }
@@ -29,7 +30,7 @@ class View {
             p1.innerText = products[i].name;
             p1.className = "product-name";
             let p2 = document.createElement("P"); 
-            p2.innerText = products[i].price + "₪";  
+            p2.innerText = products[i].price + "₪";  // add per kilo to price for friuts and vegis
             p2.className = "price";
 
             // Create input element
@@ -43,12 +44,17 @@ class View {
             let button = document.createElement("BUTTON");
             button.innerText = "Add to cart";
             button.className = "add-item";
+            button.addEventListener('click', this.addToCart);
 
             // Append child nodes accordigly      
             itemInfo.append(p1, p2, input, button);
             item.append(itemPic, itemInfo);
             inventory.append(item);
         }
+    }
+
+    addToCart() {
+        shoppingCartApp.addProductToCart(item);
     }
 }
 
