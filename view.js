@@ -39,37 +39,25 @@ class View {
             input.className = "quantity";
             input.min = "0";
             input.value = products[i].amount;
-            input.addEventListener('input', () => this.updateAmount(products[i], input.value));
+            input.addEventListener('input', () => {
+                this.updateAmount(products[i], input.value);
+                this.renderTotalCost();
+            });
             
             // Create button element
             let button = document.createElement("BUTTON");
             button.innerText = "Add to cart";
             button.className = "add-item";
-            button.addEventListener('click', () => this.addToCart(products[i]));
+            button.addEventListener('click', () => {
+                this.addToCart(products[i]);
+                this.renderTotalCost();
+            });
 
             // Append child nodes accordigly      
             itemInfo.append(p1, p2, input, button);
             item.append(itemPic, itemInfo);
             inventory.append(item);
         }
-    }
-
-    updateAmount(item, value) {
-        shoppingCartApp.updateAmount(item, value);
-        // let cartItem = shoppingCartApp.getItemFromCart(item);
-        // let inventoryItem = shoppingCartApp.getItemFromInventory(item);
-        // console.log(cartItem, inventoryItem);
-        // if (cartItem)
-            // document.getElementsByClassName("item-amount")[itemIndex].value = cartItem.amount;
-        // document.getElementsByClassName("quantity")[0].value = inventoryItem.amount;
-        this.renderCart(); // IMRPOVE: only rerender input value without looping through entire array 
-        this.renderInventory(); // IMRPOVE: only rerender input value without looping through entire array
-       
-    }
-
-    addToCart(item) {
-        shoppingCartApp.addProductToCart(item);
-        this.renderCart();
     }
 
     renderCart() {
@@ -97,7 +85,7 @@ class View {
             let p1 = document.createElement("P"); 
             p1.innerText = cartProducts[i].name;
             p1.className = "product-name";
-            let p2 = document.createElement("P"); 
+            let p2 = document.createElement("P");
             let price = (cartProducts[i].price * cartProducts[i].amount).toFixed(2);
             p2.innerText = price + "₪";  // add per kilo to price for friuts and vegis
             p2.className = "price";
@@ -108,13 +96,19 @@ class View {
             input.className = "item-amount";
             input.min = "0";
             input.value = cartProducts[i].amount;
-            input.addEventListener('input', () => this.updateAmount(cartProducts[i], input.value));
+            input.addEventListener('input', () => {
+                this.updateAmount(cartProducts[i], input.value);
+                this.renderTotalCost();
+            });
 
             // Create button element
             let button = document.createElement("I");
             button.innerText = "cancel";
             button.className = "material-icons cancel-btn";
-            button.addEventListener('click', this.cancelProduct);
+            button.addEventListener('click', () => {
+                this.cancelProduct();
+                this.renderTotalCost();
+            });
 
             // Append child nodes accordigly      
             itemInfo.append(p1, input, p2, button);
@@ -122,12 +116,47 @@ class View {
             cart.append(item);
         }
     }
+
+    updateAmount(item, value) {
+        shoppingCartApp.updateAmount(item, value);
+        // let cartItem = shoppingCartApp.getItemFromCart(item);
+        // let inventoryItem = shoppingCartApp.getItemFromInventory(item);
+        // console.log(cartItem, inventoryItem);
+        // if (cartItem)
+            // document.getElementsByClassName("item-amount")[itemIndex].value = cartItem.amount;
+        // document.getElementsByClassName("quantity")[0].value = inventoryItem.amount;
+        this.renderCart(); // IMRPOVE: only rerender input value without looping through entire array 
+        this.renderInventory(); // IMRPOVE: only rerender input value without looping through entire array
+       
+    }
+
+    addToCart(item) {
+        shoppingCartApp.addProductToCart(item);
+        this.renderCart();
+    }
+
+    totalCost() {
+        const cartProducts = shoppingCartApp.getCart();
+        let totalCost = 0;
+        for (let i = 0; i < cartProducts.length; ++i) {
+            totalCost += Number((cartProducts[i].price * cartProducts[i].amount).toFixed(2));
+        }
+
+        return (totalCost).toFixed(2);
+    }
+
+    renderTotalCost() {
+        let total = this.totalCost();
+        document.getElementsByClassName("total-cost")[0].innerHTML = total + ' &#8362';
+    }
+
+    totalItems() {
+        
+    }
     
     cancelProduct() {
         console.log("product canceled");
     }
-
-
 }
 
 const productsView = new View();
