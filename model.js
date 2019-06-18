@@ -25,11 +25,3 @@ let productsData = [
   ];
 
   let cart = [];
-
-  // function addProducttoInventory(name, img, price) {
-
-  // }
-
-  // function addProducttoCart() {
-      
-  // }

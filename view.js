@@ -40,7 +40,7 @@ class View {
             input.min = "0";
             input.value = products[i].amount;
             input.addEventListener('input', () => this.updateAmount(products[i], input.value));
-
+            
             // Create button element
             let button = document.createElement("BUTTON");
             button.innerText = "Add to cart";
@@ -62,8 +62,9 @@ class View {
         // if (cartItem)
             // document.getElementsByClassName("item-amount")[itemIndex].value = cartItem.amount;
         // document.getElementsByClassName("quantity")[0].value = inventoryItem.amount;
-        this.renderCart(); // IMRPOVE: only rerender inoput value without looping through entire array 
-        this.renderInventory(); // IMRPOVE: only rerender inoput value without looping through entire array
+        this.renderCart(); // IMRPOVE: only rerender input value without looping through entire array 
+        this.renderInventory(); // IMRPOVE: only rerender input value without looping through entire array
+       
     }
 
     addToCart(item) {
@@ -97,7 +98,8 @@ class View {
             p1.innerText = cartProducts[i].name;
             p1.className = "product-name";
             let p2 = document.createElement("P"); 
-            p2.innerText = cartProducts[i].price + "₪";  // add per kilo to price for friuts and vegis
+            let price = (cartProducts[i].price * cartProducts[i].amount).toFixed(2);
+            p2.innerText = price + "₪";  // add per kilo to price for friuts and vegis
             p2.className = "price";
 
             // Create input element
@@ -127,19 +129,5 @@ class View {
 
 
 }
-
-{/* <div id="cart" class="shopping-cart">
-            <div class="buy-item">
-                <div class="item-pic2">
-                    <img src="images\orange.jpg">
-                </div>
-                <div class="item-info2">
-                    <p>name</p>
-                    <input class="item-amount" type="number" min="0">
-                    <p id="total-price">price</p>
-                    <i class="material-icons cancel-btn">cancel</i>
-                </div>
-            </div> */}
-
 
 const productsView = new View();

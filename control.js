@@ -34,13 +34,7 @@ class Controller {
         if (cart.includes(item)) {
             cart[cart.indexOf(item)].amount = value;
         }
-    }
-
-    updatePrice() {
-        
-    }
-
-   
+    }  
 }
 
 const shoppingCartApp = new Controller(productsView);
