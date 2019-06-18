@@ -29,10 +29,19 @@ class Controller {
         }
     }
 
+    removeItemFromCart(item) {
+        let index = cart.indexOf(item);
+        cart.splice(index, 1);
+    }
+
     updateAmount(item, value) {
         productsData[productsData.indexOf(item)].amount = value;
         if (cart.includes(item)) {
             cart[cart.indexOf(item)].amount = value;
+        }
+
+        if (value === "0") {
+            this.removeItemFromCart(item);
         }
     }  
 }

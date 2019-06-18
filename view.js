@@ -51,6 +51,7 @@ class View {
             button.addEventListener('click', () => {
                 this.addToCart(products[i]);
                 this.renderTotalCost();
+                this.renderTotalItems();
             });
 
             // Append child nodes accordigly      
@@ -106,8 +107,10 @@ class View {
             button.innerText = "cancel";
             button.className = "material-icons cancel-btn";
             button.addEventListener('click', () => {
-                this.cancelProduct();
+                this.cancelProduct(cartProducts[i]);
                 this.renderTotalCost();
+                this.renderTotalItems();
+                this.renderCart();
             });
 
             // Append child nodes accordigly      
@@ -119,12 +122,6 @@ class View {
 
     updateAmount(item, value) {
         shoppingCartApp.updateAmount(item, value);
-        // let cartItem = shoppingCartApp.getItemFromCart(item);
-        // let inventoryItem = shoppingCartApp.getItemFromInventory(item);
-        // console.log(cartItem, inventoryItem);
-        // if (cartItem)
-            // document.getElementsByClassName("item-amount")[itemIndex].value = cartItem.amount;
-        // document.getElementsByClassName("quantity")[0].value = inventoryItem.amount;
         this.renderCart(); // IMRPOVE: only rerender input value without looping through entire array 
         this.renderInventory(); // IMRPOVE: only rerender input value without looping through entire array
        
@@ -151,11 +148,21 @@ class View {
     }
 
     totalItems() {
-        
+        const cartProducts = shoppingCartApp.getCart();
+        let total = 0;
+        for (let i = 0; i < cartProducts.length; ++i) {
+            ++total;
+        }
+        return total;
+    }
+
+    renderTotalItems() {
+        let total = this.totalItems();
+        document.getElementsByClassName("badge")[0].innerHTML = total;
     }
     
-    cancelProduct() {
-        console.log("product canceled");
+    cancelProduct(item) {
+        shoppingCartApp.removeItemFromCart(item);
     }
 }
 
