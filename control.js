@@ -38,10 +38,12 @@ class Controller {
         productsData[productsData.indexOf(item)].amount = value;
         if (cart.includes(item)) {
             cart[cart.indexOf(item)].amount = value;
-        }
-
-        if (value === "0") {
-            this.removeItemFromCart(item);
+            if (value === "0") {
+                this.removeItemFromCart(item);
+            }
+            return true;
+        }else {
+            return false;
         }
     }  
 }
