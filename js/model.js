@@ -24,4 +24,5 @@ let productsData = [
     { id: 22, name: "Yogurt", image: "images/yogurt.png" , price: 3.2, amount: 0, catagory: "Milk Products" }
   ];
 
+  let inventory = [];
   let cart = [];

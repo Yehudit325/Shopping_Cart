@@ -123,18 +123,26 @@ class View {
         if (shoppingCartApp.updateAmount(item, value)) {
             let cartItem = document.getElementById("cart-item-" + item.id);
             cartItem.getElementsByClassName("item-amount")[0].value = value;
-            cartItem.getElementsByClassName("price")[0].innerText = (item.price * item.amount).toFixed(2);
+            cartItem.getElementsByClassName("price")[0].innerText = (item.price * item.getAmount()).toFixed(2);
         }
         
         let inventoryItem = document.getElementById("inventory-item-" + item.id);
         inventoryItem.getElementsByClassName("quantity")[0].value = value;
+
+        if (value === "0") {
+            this.cancelProduct(item);
+        }
     }
 
+    /*  refactor: instead of looping through cart each time hold totalCost as variable and add
+        or subtract total as needed when item is added/removed from class 
+        (same for total amount of items in cart)
+    */
     totalCost() {
         const cartProducts = shoppingCartApp.getCart();
         let totalCost = 0;
         for (let i = 0; i < cartProducts.length; ++i) {
-            totalCost += Number((cartProducts[i].price * cartProducts[i].amount).toFixed(2));
+            totalCost += Number((cartProducts[i].price * cartProducts[i].getAmount()).toFixed(2));
         }
 
         return (totalCost).toFixed(2);
